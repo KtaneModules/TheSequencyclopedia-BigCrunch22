@@ -228,6 +228,7 @@ public class TheSequencyclopediaScript : MonoBehaviour
 				
 				if (x == Mechanon.Length - 1)
 				{
+					Debug.LogFormat("[The Sequencyclopedia #{0}] The module was able to gather information on https://oeis.org/.", moduleId);
 					StopCoroutine(PartTime);
 					for (int a = 0; a < 10; a++)
 					{
