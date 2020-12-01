@@ -24,14 +24,12 @@ public class TheSequencyclopediaScript : MonoBehaviour
 	List<string> MochaBerry = new List<string>();
 	string Answer = "", YourAnswer = "", Connecting = "CONNECTING";
 	Coroutine PartTime;
-	bool Interacted = false;
+	bool Interacted = false, Interactable = false;
     
     //Logging
     static int moduleIdCounter = 1;
     int moduleId;
     private bool ModuleSolved;
-	
-	bool Interactable = false;
 	
 	void Awake()
     {
@@ -131,6 +129,7 @@ public class TheSequencyclopediaScript : MonoBehaviour
 			Module.HandleStrike();
 			Connecting = "RESTARTING";
 			YourAnswer = "";
+			Interacted = false;
 			Number.text = "";
 			Number.color = new Color(189f/255f, 0f/255f, 0f/255f);
 			yield return new WaitForSeconds(0.2f);
@@ -266,7 +265,7 @@ public class TheSequencyclopediaScript : MonoBehaviour
 			while (!www2.isDone) { yield return null; };
 			if (www2.error == null)
 			{
-				if (Regex.IsMatch(www2.text.ToUpper(), "ALLOCATED FOR"))
+				if (Regex.IsMatch(www2.text.ToUpper(), "ALLOCATED FOR") || Regex.IsMatch(www2.text.ToUpper(), "SORRY,"))
 				{
 					for (int x = 0; x < 9; x++)
 					{
@@ -274,7 +273,7 @@ public class TheSequencyclopediaScript : MonoBehaviour
 						SecondQuery = "https://oeis.org/A" + Hopper.ToString();
 						www2 = new WWW(SecondQuery);
 						while (!www2.isDone) { yield return null; };
-						if (www2.error == null && !Regex.IsMatch(www2.text.ToUpper(), "ALLOCATED FOR"))
+						if (www2.error == null && !Regex.IsMatch(www2.text.ToUpper(), "ALLOCATED FOR") && !Regex.IsMatch(www2.text.ToUpper(), "SORRY,"))
 						{
 							Debug.LogFormat("[The Sequencyclopedia #{0}] The module was able to gather information on https://oeis.org/.", moduleId);
 							string[] Auracell = www2.text.Split('\n');
