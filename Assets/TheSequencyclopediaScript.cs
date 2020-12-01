@@ -252,10 +252,10 @@ public class TheSequencyclopediaScript : MonoBehaviour
 						}
 						Audio.PlaySoundAtTransform(SFX[3].name, transform);
 						yield return new WaitForSeconds(0.6f);
-						Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
-						Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0", moduleId);
-						Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: 102");
 					}
+					Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
+					Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0", moduleId);
+					Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: 102");
 					goto JumpShot;
 				}
 			}
@@ -408,6 +408,7 @@ public class TheSequencyclopediaScript : MonoBehaviour
 					Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
 					Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: {1}", moduleId, Aloin);
 					Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: {1}", moduleId, MochaBerry.Count().ToString());
+					goto JumpShot;
 				}
 			}
 			
@@ -434,7 +435,7 @@ public class TheSequencyclopediaScript : MonoBehaviour
 					{
 						ALister.text += "4";
 					}
-					Audio.PlaySoundAtTransform(SFX[0].name, transform);
+					Audio.PlaySoundAtTransform(SFX[3].name, transform);
 					yield return new WaitForSeconds(0.6f);
 				}
 				Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
@@ -468,12 +469,13 @@ public class TheSequencyclopediaScript : MonoBehaviour
 				{
 					ALister.text += "4";
 				}
-				Audio.PlaySoundAtTransform(SFX[0].name, transform);
+				Audio.PlaySoundAtTransform(SFX[3].name, transform);
 				yield return new WaitForSeconds(0.6f);
 			}
 			Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
 			Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0", moduleId);
 			Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: 102");
+			goto JumpShot;
 		}
 		
 		JumpShot:
