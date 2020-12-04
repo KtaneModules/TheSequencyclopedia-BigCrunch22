@@ -25,6 +25,10 @@ public class TheSequencyclopediaScript : MonoBehaviour
 	string Answer = "", YourAnswer = "", Connecting = "CONNECTING";
 	Coroutine PartTime;
 	bool Interacted = false, Interactable = false;
+	
+	//Souvenir dedicated Variables
+	string Tridal = "";
+	string APass = "";
     
     //Logging
     static int moduleIdCounter = 1;
@@ -75,6 +79,7 @@ public class TheSequencyclopediaScript : MonoBehaviour
 			OuterLED[a].material = LEDColor[0];
 			InnerLED[a].material = LEDColor[0];
 		}
+		APass = ALister.text;
 		PartTime = StartCoroutine(LightCycle());
 		TrueNumber.text = "";
 		ALister.text = "";
@@ -205,7 +210,6 @@ public class TheSequencyclopediaScript : MonoBehaviour
 		while (!www.isDone) { yield return null; };
 		if (www.error == null)
         {
-			string Tridal = "";
 			string[] Mechanon = www.text.Split('\n');
 			Mechanon.Reverse();
 			for (int x = 0; x < Mechanon.Length; x++)
