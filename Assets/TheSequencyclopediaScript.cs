@@ -25,6 +25,7 @@ public class TheSequencyclopediaScript : MonoBehaviour
 	string Answer = "", YourAnswer = "", Connecting = "CONNECTING";
 	Coroutine PartTime;
 	bool Interacted = false, Interactable = false;
+	char[] ValidNumbers = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 	
 	//Souvenir dedicated Variables
 	string Tridal = "";
@@ -263,7 +264,7 @@ public class TheSequencyclopediaScript : MonoBehaviour
 				}
 			}
 			
-			int Hopper = UnityEngine.Random.Range(0, Int32.Parse(Tridal) + 1);
+			int Hopper = UnityEngine.Random.Range(1, Int32.Parse(Tridal) + 1);
 			string SecondQuery = "https://oeis.org/A" + Hopper.ToString();
 			WWW www2 = new WWW(SecondQuery);
 			while (!www2.isDone) { yield return null; };
@@ -282,9 +283,9 @@ public class TheSequencyclopediaScript : MonoBehaviour
 							Debug.LogFormat("[The Sequencyclopedia #{0}] The module was able to gather information on https://oeis.org/.", moduleId);
 							string[] Auracell = www2.text.Split('\n');
 							string Forloin = "";
-							for (int a = 120; a < Auracell.Length; a++)
+							for (int a = 0; a < Auracell.Length; a++)
 							{
-								if (Regex.IsMatch(Auracell[a], "<tt>"))
+								if (Regex.IsMatch(Auracell[a], "<tt>") && Regex.IsMatch(Auracell[a], ",") && ValidNumbers.Any(d => Regex.Replace(Auracell[a], "[t<>/]", "").ToUpper().ToCharArray().Contains(d)))
 								{
 									Forloin = Auracell[a];
 									break;
@@ -368,9 +369,9 @@ public class TheSequencyclopediaScript : MonoBehaviour
 					Debug.LogFormat("[The Sequencyclopedia #{0}] The module was able to gather information on https://oeis.org/.", moduleId);
 					string[] Auracell = www2.text.Split('\n');
 					string Forloin = "";
-					for (int a = 120; a < Auracell.Length; a++)
+					for (int a = 0; a < Auracell.Length; a++)
 					{
-						if (Regex.IsMatch(Auracell[a], "<tt>"))
+						if (Regex.IsMatch(Auracell[a], "<tt>") && Regex.IsMatch(Auracell[a], ",") && ValidNumbers.Any(d => Regex.Replace(Auracell[a], "[t<>/]", "").ToUpper().ToCharArray().Contains(d)))
 						{
 							Forloin = Auracell[a];
 							break;
