@@ -259,8 +259,7 @@ public class TheSequencyclopediaScript : MonoBehaviour
 					}
 					Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
 					Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0", moduleId);
-					Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: 102");
-					StartCoroutine(GenerateBinary());
+					Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: 102", moduleId);
 				}
 			}
 			
@@ -358,8 +357,7 @@ public class TheSequencyclopediaScript : MonoBehaviour
 							}
 							Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
 							Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0", moduleId);
-							Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: 102");
-							StartCoroutine(GenerateBinary());
+							Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: 102", moduleId);
 						}
 					}
 				}
@@ -412,7 +410,6 @@ public class TheSequencyclopediaScript : MonoBehaviour
 					Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
 					Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: {1}", moduleId, Aloin);
 					Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: {1}", moduleId, MochaBerry.Count().ToString());
-					StartCoroutine(GenerateBinary());
 				}
 			}
 			
@@ -444,8 +441,7 @@ public class TheSequencyclopediaScript : MonoBehaviour
 				}
 				Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
 				Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0", moduleId);
-				Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: 102");
-				StartCoroutine(GenerateBinary());
+				Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: 102", moduleId);
 			}
 		}
 		
@@ -478,9 +474,9 @@ public class TheSequencyclopediaScript : MonoBehaviour
 			}
 			Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
 			Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0", moduleId);
-			Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: 102");
-			StartCoroutine(GenerateBinary());
+			Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: 102", moduleId);
 		}
+		StartCoroutine(GenerateBinary());
 	}
 	
 	IEnumerator GenerateBinary()
