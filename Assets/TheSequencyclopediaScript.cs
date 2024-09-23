@@ -28,7 +28,7 @@ public class TheSequencyclopediaScript : MonoBehaviour
 	char[] ValidNumbers = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 	
 	//Souvenir dedicated Variables
-	string Tridal = "";
+	string Tridal = "400000";
 	string APass = "";
     
     //Logging
@@ -206,215 +206,66 @@ public class TheSequencyclopediaScript : MonoBehaviour
 			Number.text += Connecting[b].ToString();
 			yield return new WaitForSeconds(0.1f);
 		}
+		int AttemptConnection = 0;
 		string Query = "https://oeis.org/";
+		Recheck:
 		WWW www = new WWW(Query);
 		while (!www.isDone) { yield return null; };
 		if (www.error == null)
         {
-			string[] Mechanon = www.text.Split('\n');
-			Mechanon.Reverse();
-			for (int x = 0; x < Mechanon.Length; x++)
-			{
-				if (Regex.IsMatch(Mechanon[x].ToUpper(), "CONTAINS"))
-				{
-					string[] Aura = Mechanon[x].Split('.');
-					string[] MechaFor = Aura[1].Split(' ');
-					for (int a = 0; a < MechaFor.Length - 1; a++)
-					{
-						if (MechaFor[a].ToUpper() == "CONTAINS")
-						{
-							Tridal = MechaFor[a + 1];
-							break;
-						}
-					}
-					break;
-				}
-				
-				if (x == Mechanon.Length - 1)
-				{
-					Debug.LogFormat("[The Sequencyclopedia #{0}] The module was able to gather information on https://oeis.org/.", moduleId);
-					StopCoroutine(PartTime);
-					for (int a = 0; a < 10; a++)
-					{
-						OuterLED[a].material = LEDColor[0];
-						InnerLED[a].material = LEDColor[0];
-					}
-					Number.text = "";
-					ALister.text += "A";
-					Audio.PlaySoundAtTransform(SFX[3].name, transform);
-					yield return new WaitForSeconds(0.6f);
-					for (int d = 0; d < 6; d++)
-					{
-						if (d < 5)
-						{
-							ALister.text += "0";
-						}
-						
-						else
-						{
-							ALister.text += "4";
-						}
-						Audio.PlaySoundAtTransform(SFX[3].name, transform);
-						yield return new WaitForSeconds(0.6f);
-					}
-					Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
-					Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0", moduleId);
-					Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: 102", moduleId);
-				}
-			}
-			
-			int Hopper = UnityEngine.Random.Range(1, Int32.Parse(Tridal) + 1);
-			string SecondQuery = "https://oeis.org/A" + Hopper.ToString();
+			int AttemptCount = 0;
+			PickAnother:
+			string NumberPicker = UnityEngine.Random.Range(0,400).ToString("000");
+			string SecondPart = NumberPicker == "000" ? UnityEngine.Random.Range(1,1000).ToString("000") : UnityEngine.Random.Range(0,1000).ToString("000");
+			string SecondQuery = "https://raw.githubusercontent.com/oeis/oeisdata/refs/heads/main/seq/A" + NumberPicker + "/" + "A" + NumberPicker + SecondPart + ".seq";
 			WWW www2 = new WWW(SecondQuery);
 			while (!www2.isDone) { yield return null; };
 			if (www2.error == null)
 			{
-				if (Regex.IsMatch(www2.text.ToUpper(), "ALLOCATED FOR") || Regex.IsMatch(www2.text.ToUpper(), "SORRY,"))
+				Debug.LogFormat("[The Sequencyclopedia #{0}] The module was able to gather information on https://oeis.org/.", moduleId);
+				string[] Auracell = www2.text.Split('\n');
+				string Forloin = "";
+				for (int a = 1; a < Auracell.Length; a++)
 				{
-					for (int x = 0; x < 9; x++)
+					string Checker = Auracell[a].Substring(11);
+					if (Regex.Matches(Checker,@"[a-zA-Z]").Count > 0)
 					{
-						Hopper = UnityEngine.Random.Range(1, Int32.Parse(Tridal) + 1);
-						SecondQuery = "https://oeis.org/A" + Hopper.ToString();
-						www2 = new WWW(SecondQuery);
-						while (!www2.isDone) { yield return null; };
-						if (www2.error == null && !Regex.IsMatch(www2.text.ToUpper(), "ALLOCATED FOR") && !Regex.IsMatch(www2.text.ToUpper(), "SORRY,"))
-						{
-							Debug.LogFormat("[The Sequencyclopedia #{0}] The module was able to gather information on https://oeis.org/.", moduleId);
-							string[] Auracell = www2.text.Split('\n');
-							string Forloin = "";
-							for (int a = 0; a < Auracell.Length; a++)
-							{
-								if (Regex.IsMatch(Auracell[a], "<tt>") && Regex.IsMatch(Auracell[a], ",") && ValidNumbers.Any(d => Regex.Replace(Auracell[a], "[t<>/]", "").ToUpper().ToCharArray().Contains(d)))
-								{
-									Forloin = Auracell[a];
-									break;
-								}
-							}
-							Forloin = Regex.Replace(Forloin, " ", "");
-							Forloin = Regex.Replace(Forloin, "<tt>", "");
-							Forloin = Regex.Replace(Forloin, "</tt>", "");
-							MochaBerry = new List<string>(Forloin.Split(','));
-							string Chronicler = Hopper.ToString();
-							int BuiltInNumber = 0;
-							StopCoroutine(PartTime);
-							for (int d = 0; d < 10; d++)
-							{
-								OuterLED[d].material = LEDColor[0];
-								InnerLED[d].material = LEDColor[0];
-							}
-							Number.text = "";
-							ALister.text += "A";
-							Audio.PlaySoundAtTransform(SFX[3].name, transform);
-							yield return new WaitForSeconds(0.6f);
-							for (int m = 0; m < Tridal.Length; m++)
-							{
-								if (m < Tridal.Length - Chronicler.Length)
-								{
-									ALister.text += "0";
-								}
-								
-								else
-								{
-									ALister.text += Chronicler[BuiltInNumber].ToString();
-									BuiltInNumber++;
-								}
-								Audio.PlaySoundAtTransform(SFX[3].name, transform);
-								yield return new WaitForSeconds(0.6f);
-							}
-							string Aloin = Regex.Replace(Forloin, ",", ", ");
-							Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
-							Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: {1}", moduleId, Aloin);
-							Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: {1}", moduleId, MochaBerry.Count().ToString());
-							break;
-						}
-						
-						if (x == 8)
-						{
-							StopCoroutine(PartTime);
-							Debug.LogFormat("[The Sequencyclopedia #{0}] Unable to gather information on https://oeis.org/ during its 10 cycles. Using the failsafe.", moduleId);
-							for (int a = 0; a < 10; a++)
-							{
-								OuterLED[a].material = LEDColor[0];
-								InnerLED[a].material = LEDColor[0];
-							}
-							Number.text = "";
-							ALister.text += "A";
-							Audio.PlaySoundAtTransform(SFX[3].name, transform);
-							yield return new WaitForSeconds(0.6f);
-							for (int d = 0; d < 6; d++)
-							{
-								if (d < 5)
-								{
-									ALister.text += "0";
-								}
-								
-								else
-								{
-									ALister.text += "4";
-								}
-								Audio.PlaySoundAtTransform(SFX[3].name, transform);
-								yield return new WaitForSeconds(0.6f);
-							}
-							Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
-							Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0", moduleId);
-							Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: 102", moduleId);
-						}
+						break;
 					}
+					Forloin = Forloin + Checker;
 				}
-				
-				else
+				MochaBerry = new List<string>(Forloin.Split(','));
+				string Chronicler = NumberPicker + SecondPart;
+				StopCoroutine(PartTime);
+				for (int d = 0; d < 10; d++)
 				{
-					Debug.LogFormat("[The Sequencyclopedia #{0}] The module was able to gather information on https://oeis.org/.", moduleId);
-					string[] Auracell = www2.text.Split('\n');
-					string Forloin = "";
-					for (int a = 0; a < Auracell.Length; a++)
-					{
-						if (Regex.IsMatch(Auracell[a], "<tt>") && Regex.IsMatch(Auracell[a], ",") && ValidNumbers.Any(d => Regex.Replace(Auracell[a], "[t<>/]", "").ToUpper().ToCharArray().Contains(d)))
-						{
-							Forloin = Auracell[a];
-							break;
-						}
-					}
-					Forloin = Regex.Replace(Forloin, " ", "");
-					Forloin = Regex.Replace(Forloin, "<tt>", "");
-					Forloin = Regex.Replace(Forloin, "</tt>", "");
-					MochaBerry = new List<string>(Forloin.Split(','));
-					string Chronicler = Hopper.ToString();
-					int BuiltInNumber = 0;
-					StopCoroutine(PartTime);
-					for (int d = 0; d < 10; d++)
-					{
-						OuterLED[d].material = LEDColor[0];
-						InnerLED[d].material = LEDColor[0];
-					}
-					Number.text = "";
-					ALister.text += "A";
+					OuterLED[d].material = LEDColor[0];
+					InnerLED[d].material = LEDColor[0];
+				}
+				Number.text = "";
+				ALister.text += "A";
+				Audio.PlaySoundAtTransform(SFX[3].name, transform);
+				yield return new WaitForSeconds(0.6f);
+				for (int m = 0; m < Chronicler.Length; m++)
+				{
+					ALister.text += Chronicler[m].ToString();
 					Audio.PlaySoundAtTransform(SFX[3].name, transform);
 					yield return new WaitForSeconds(0.6f);
-					for (int m = 0; m < Tridal.Length; m++)
-					{
-						if (m < Tridal.Length - Chronicler.Length)
-						{
-							ALister.text += "0";
-						}
-						
-						else
-						{
-							ALister.text += Chronicler[BuiltInNumber].ToString();
-							BuiltInNumber++;
-						}
-						Audio.PlaySoundAtTransform(SFX[3].name, transform);
-						yield return new WaitForSeconds(0.6f);
-					}
-					string Aloin = Regex.Replace(Forloin, ",", ", ");
-					Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
-					Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: {1}", moduleId, Aloin);
-					Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: {1}", moduleId, MochaBerry.Count().ToString());
 				}
+				string Aloin = Regex.Replace(Forloin, ",", ", ");
+				Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence name gathered by the module: {1}", moduleId, ALister.text);
+				Debug.LogFormat("[The Sequencyclopedia #{0}] The sequence gathered: {1}", moduleId, Aloin);
+				Debug.LogFormat("[The Sequencyclopedia #{0}] The length of the sequence gathered: {1}", moduleId, MochaBerry.Count().ToString());
 			}
 			
 			else
 			{
+				if (AttemptCount != 10)
+				{
+					AttemptCount++;
+					goto PickAnother;
+				}
+				
 				Debug.LogFormat("[The Sequencyclopedia #{0}] Unable to gather information on https://oeis.org/. Using the failsafe.", moduleId);
 				StopCoroutine(PartTime);
 				for (int a = 0; a < 10; a++)
@@ -447,6 +298,12 @@ public class TheSequencyclopediaScript : MonoBehaviour
 		
 		else
 		{
+			if (AttemptConnection != 5)
+			{
+				AttemptConnection++;
+				goto Recheck;
+			}
+			
 			Debug.LogFormat("[The Sequencyclopedia #{0}] Unable to gather information on https://oeis.org/. Using the failsafe.", moduleId);
 			StopCoroutine(PartTime);
 			for (int a = 0; a < 10; a++)
